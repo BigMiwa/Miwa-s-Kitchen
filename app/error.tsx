@@ -1,0 +1,2 @@
+'use client';
+export default function Error({reset}:{reset:()=>void}){return <main className="shell grid min-h-[65vh] place-items-center text-center"><div><h1 className="text-3xl font-black text-[#481d38]">Something didn’t quite go to plan.</h1><p className="mt-3 text-[#65595a]">Your cart and account are safe. Please try again.</p><button className="btn-primary mt-6" onClick={reset}>Try again</button></div></main>}

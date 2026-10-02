@@ -1,0 +1,1 @@
+export type FulfilmentType='collection'|'delivery';export type DeliveryAddress={recipientName:string;phone:string;line1:string;line2?:string;city:string;postcode:string};export type CheckoutPayload={fulfilmentType:FulfilmentType;collectionTime?:string;deliveryAddress?:DeliveryAddress;deliveryNotes?:string};

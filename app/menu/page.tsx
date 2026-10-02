@@ -1,0 +1,2 @@
+import {Navigation} from '@/components/miwas-kitchen/navigation';import {MenuBrowser} from '@/components/miwas-kitchen/menu-browser';
+export default function MenuPage(){return <><Navigation/><main className="shell pb-24 pt-10 md:pb-12"><p className="eyebrow">Miwa’s menu</p><h1 className="mt-2 text-4xl font-black text-[#481d38]">Something lovely for everyone.</h1><p className="mt-3 max-w-xl text-[#65595a]">Browse our current dishes. Menu details are sample content and easy to refresh as the kitchen evolves.</p><div className="mt-8"><MenuBrowser/></div></main></>}

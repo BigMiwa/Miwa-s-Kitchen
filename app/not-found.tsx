@@ -1,0 +1,2 @@
+import Link from 'next/link';
+export default function NotFound(){return <main className="shell grid min-h-[70vh] place-items-center text-center"><div><p className="eyebrow">A small detour</p><h1 className="mt-3 text-5xl font-black text-[#481d38]">This page isn’t on the menu.</h1><p className="mt-4 text-[#65595a]">Let’s get you back to something delicious.</p><Link className="btn-primary mt-7" href="/menu">Browse the menu</Link></div></main>}

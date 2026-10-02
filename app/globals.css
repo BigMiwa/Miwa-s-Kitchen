@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --cream:#fffaf3; --cream-deep:#f6ede1; --plum:#481d38; --mulberry:#7d385c; --berry:#b95576; --cocoa:#2d2425; --sage:#516a55; }
+* { box-sizing:border-box; }
+body { background:var(--cream); color:var(--cocoa); font-family: Arial, Helvetica, sans-serif; }
+button, a { -webkit-tap-highlight-color: transparent; }
+@layer components { .shell{@apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8}.eyebrow{@apply text-xs font-bold uppercase tracking-[.18em] text-[#7d385c]}.card{@apply rounded-[1.5rem] bg-white shadow-[0_8px_26px_rgba(72,29,56,.09)]}.soft-ring{@apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#7d385c] focus-visible:ring-offset-2}.btn-primary{@apply soft-ring inline-flex items-center justify-center rounded-full bg-[#481d38] px-5 py-3 font-bold text-white transition hover:bg-[#7d385c]}.btn-secondary{@apply soft-ring inline-flex items-center justify-center rounded-full border border-[#481d38]/20 bg-white px-5 py-3 font-bold text-[#481d38] transition hover:bg-[#f6ede1]}}

@@ -1,0 +1,2 @@
+export type Bundle={id:string;name:string;description:string;itemIds:string[];price:number;badge:string};
+export const bundles:Bundle[]=[{id:'rice-comfort',name:'Rice & sides comfort',description:'Smoky jollof, sweet plantain and zobo.',itemIds:['jollof','plantain','zobo'],price:20,badge:'A family favourite'},{id:'small-chops-box',name:'Small chops sharing box',description:'Puff puff, meat pies and a chilled zobo.',itemIds:['puff-puff','meat-pie','zobo'],price:12,badge:'Made for sharing'}];
