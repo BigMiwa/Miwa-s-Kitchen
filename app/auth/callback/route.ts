@@ -11,9 +11,10 @@ type SupabaseCookie = {
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const code = url.searchParams.get('code');
-  const next = url.searchParams.get('next') || '/account';
+  const requestedNext = url.searchParams.get('next');
+  const next = requestedNext && requestedNext.startsWith('/') && !requestedNext.startsWith('//') ? requestedNext : '/account';
 
-  if (!code) return NextResponse.redirect(new URL('/?auth=cancelled', url.origin));
+  if (!code) return NextResponse.redirect(new URL('/cart?auth=cancelled', url.origin));
 
   const jar = await cookies();
   const response = NextResponse.redirect(new URL(next, url.origin));

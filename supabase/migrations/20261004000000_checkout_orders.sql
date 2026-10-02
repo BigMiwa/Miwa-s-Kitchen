@@ -1,0 +1,11 @@
+alter table public.orders add column if not exists checkout_key uuid unique;
+alter table public.orders alter column fulfilment_status set default 'awaiting_confirmation';
+create or replace function public.create_pending_order(p_checkout_key uuid,p_customer_name text,p_customer_email text,p_customer_phone text,p_fulfilment_type text,p_collection_time text,p_delivery_address jsonb,p_delivery_notes text,p_subtotal integer,p_delivery_fee integer,p_total integer,p_currency text,p_items jsonb)
+returns public.orders language plpgsql security definer set search_path=public as $$
+declare result public.orders; item jsonb; order_id uuid; begin
+ if auth.uid() is null then raise exception 'unauthenticated'; end if;
+ select * into result from public.orders where user_id=auth.uid() and checkout_key=p_checkout_key; if found then return result; end if;
+ insert into public.orders(user_id,checkout_key,order_number,status,fulfilment_type,fulfilment_status,payment_status,customer_name,customer_email,customer_phone,collection_time,delivery_address,delivery_notes,subtotal_amount,delivery_fee_amount,total_amount,currency) values(auth.uid(),p_checkout_key,'MK-'||upper(substr(replace(gen_random_uuid()::text,'-',''),1,8)),'pending',p_fulfilment_type,'awaiting_confirmation','pending',p_customer_name,p_customer_email,p_customer_phone,p_collection_time,p_delivery_address,p_delivery_notes,p_subtotal,p_delivery_fee,p_total,p_currency) returning * into result; order_id:=result.id;
+ for item in select * from jsonb_array_elements(p_items) loop insert into public.order_items(order_id,menu_item_id,item_name,item_description,unit_price_amount,quantity,selected_options,special_instructions,line_total_amount) values(order_id,item->>'menu_item_id',item->>'item_name',item->>'item_description',(item->>'unit_price_amount')::int,(item->>'quantity')::int,item->'selected_options',item->>'special_instructions',(item->>'line_total_amount')::int); end loop;
+ delete from public.cart_items where cart_id in(select id from public.carts where user_id=auth.uid() and status='active'); return result; end $$;
+grant execute on function public.create_pending_order(uuid,text,text,text,text,text,jsonb,text,integer,integer,integer,text,jsonb) to authenticated;
