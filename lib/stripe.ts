@@ -1,2 +1,4 @@
 import Stripe from 'stripe';
-export const stripe=process.env.STRIPE_SECRET_KEY?new Stripe(process.env.STRIPE_SECRET_KEY,{apiVersion:'2024-12-18.acacia'}):null;
+// Leave the API version to the installed SDK. Pinning an incompatible version
+// causes Vercel's TypeScript build to fail before a deployment is created.
+export const stripe=process.env.STRIPE_SECRET_KEY?new Stripe(process.env.STRIPE_SECRET_KEY):null;
