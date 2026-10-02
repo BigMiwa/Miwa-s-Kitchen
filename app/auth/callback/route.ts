@@ -18,9 +18,11 @@ export async function GET(request: Request) {
 
   const jar = await cookies();
   const response = NextResponse.redirect(new URL(next, url.origin));
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://tubnwdidtqovuunwzvkw.supabase.co';
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_ljpESmJLs9bXplcrxF6PZg_phNDg1uh';
   const client = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    supabaseUrl,
+    supabaseKey,
     {
       cookies: {
         getAll: () => jar.getAll(),
