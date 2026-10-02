@@ -2,7 +2,11 @@ import { NextResponse } from 'next/server';
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
-type SupabaseCookie = { name: string; value: string; options: CookieOptions };
+type SupabaseCookie = {
+  name: string;
+  value: string;
+  options: CookieOptions;
+};
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
